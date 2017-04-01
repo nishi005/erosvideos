@@ -1,0 +1,24 @@
+var $add_after_movie = $('.add_after_movie');
+var $popup = $('.popup');
+
+var top_offset = $add_after_movie.offset().top;
+var left_offset = $add_after_movie.offset().left;
+
+//ポップアップを移動させる
+$popup.css({
+  top: top_offset + 25,
+  left: left_offset
+});
+
+//ポップアップにメッセージを入れる
+$('.popup p').html(
+  '<%= escape_javascript("#{@message}") %>'
+);
+
+$('.popup p').css('display', 'inline-block');
+
+$popup.fadeIn('slow');
+
+setTimeout(function() {
+  $popup.fadeOut('slow');
+}, 2000);

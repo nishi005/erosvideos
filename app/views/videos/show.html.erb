@@ -1,0 +1,170 @@
+<div id="video_page_content">
+	<div class="popup">
+		<i class="fa fa-check" aria-hidden="true"></i>
+		<p></p>
+	</div>
+	<div class="content_wrapper">
+		<article class="movie_screen">
+			<% if @video_infos.video_type == 'xvideos' %>
+				<iframe src="https://flashservice.xvideos.com/embedframe/<%= @video_infos.video_id.sub(/video/, "") %>" frameborder=0 scrolling=no allowfullscreen=allowfullscreen></iframe>
+			<% elsif @video_infos.video_type == 'pornhub' %>
+				<iframe src="https://jp.pornhub.com/embed/<%= @video_infos.video_id %>" frameborder="0" width="560" height="340" scrolling="no" allowfullscreen></iframe>
+			<% elsif @video_infos.video_type == 'erovideo' %>
+				<iframe frameborder="0" scrolling="no" allowfullscreen="allowfullscreen" src="http://ero-video.net/blogframe/?mcd=<%= @video_infos.video_id %>"></iframe>
+			<% elsif @video_infos.video_type =~ /TokyoTube/i %>
+				<div class="tokyotube_movie">
+					<script type="text/javascript" src="http://www.tokyo-tube.com/embedcode/v<%= @video_infos.video_id %>/u/player"></script>
+				</div>
+			<% elsif @video_infos.video_type =~ /sharemovie|share movie/i %>
+				<iframe src="http://smv.to/embed/<%= @video_infos.video_id %>/" frameborder=0 width="1280" height="720" scrolling=no></iframe>
+			<% elsif @video_infos.video_type =~ /ThisAV/i %>
+				<% if @movie_addr != nil %>
+					<video src="<%= @movie_addr %>" autoplay controls poster='<%= @video_infos.thumbnail %>'>
+						<p>動画の再生にはvideoタグに対応したブラウザが必要です。</p>
+					</video>
+				<% else %>
+					<p>動画が削除されています。</p>
+				<% end %>
+			<% end %>
+			<div class="movie_info">
+				<h2><%= @video_infos.title %></h2>
+				<% @title = @video_infos.title %>
+				<p class="title_edit_link"><%= link_to 'タイトルを編集', video_edit_title_path(params[:id]) %></p>
+				<% if @video_infos.comment != nil %>
+				<p><%= @video_infos.comment %></p>
+				<% end %>
+				<p class="right"><span class="total_number_of_views">視聴回数：<%= @video_infos.total_number_of_views %></span></p>
+
+				<div class="good_and_bad">
+				<%= form_tag(favorites_path, remote: true, class: :add_favorite_form) do %>
+					<%= hidden_field_tag :id, params[:id] %>
+					<%= button_tag type: 'submit', class: "add_favorite function_btn" do %>
+					<i class="fa fa-star" aria-hidden="true"></i>
+					<% end %>
+				<% end %>
+				<%= form_tag(watch_later_index_path, remote: true, class: :add_after_movie_form) do %>
+					<%= hidden_field_tag :id, params[:id] %>
+					<%= button_tag type: 'submit', class: "add_after_movie function_btn" do %>
+					<i class="fa fa-bookmark" aria-hidden="true"></i>
+					<% end %>
+				<% end %>
+				<%= form_tag({controller: :disliked_videos, action: :update, id: @video_infos.id}, remote: true, method: :patch, class: :thums_down_form) do %>
+					<%= hidden_field_tag :id, params[:id] %>
+					<%= button_tag type: 'submit', class: "thums_down function_btn" do %>
+					<i class="fa fa-thumbs-down" aria-hidden="true"></i>
+					<% end %>
+					<span class="thums_down_num"><%= @video_infos.bad %></span>
+				<% end %>
+				<%= form_tag(highly_rated_videos_path, remote: true, class: :thums_up_form) do %>
+					<%= hidden_field_tag :id, params[:id] %>
+					<%= button_tag type: 'submit', class: "thums_up function_btn" do %>
+					<i class="fa fa-thumbs-up" aria-hidden="true"></i>
+					<% end %>
+					<span class="thums_up_num"><%= @video_infos.good %></span>
+				<% end %>
+				</div>
+			</div>
+
+			<div class="movie_info tags">
+				<p>tags：</p>
+				<% if @tag_infos != nil then %>
+					<% tag_index = 1; %>
+					<% @tag_infos.each do |tag_info| %>
+						<%= link_to url_for(controller: :tags, tag_name: tag_info.tag) do %>
+							<span class="<%= tag_info.tag %>"><%= tag_info.tag %></span>
+						<% end %>
+						<% if tag_index != 1 then %>
+							<%= form_tag(tag_path, class: "tag_delete_form tag_delete_form_" + tag_info.tag, remote: true, method: :delete) do %>
+								<%= hidden_field_tag :tag_name, tag_info.tag %>
+								<%= hidden_field_tag :deleted_tag, tag_info.tag %>
+								<%= hidden_field_tag :tag_current_size, @tag_infos.length, class: "tag_current_size" %>
+								<%= button_tag type: 'submit', class: "tag_delete_btn" do %>
+									<i class="fa fa-times" aria-hidden="true"></i>
+								<% end %>
+							<% end %>
+						<% end %>
+						<% tag_index += 1 %>
+					<% end %>
+				<% else %>
+					<% tag_index = 1 %>
+				<% end %>
+				<p class="right tag_edit_link">タグを編集</p>
+				<%= form_tag(tags_path, class: "tag_edit_form", remote: true ) do %>
+					<div class="form-group">
+						<%= hidden_field_tag :id, params[:id], class: "video_id" %>
+						<%= hidden_field_tag :tag_index, tag_index, class: "tag_index" %>
+						<%= text_field_tag :added_tag, "", size: 50, class: "input_added_tag form-control" %>
+					</div>
+					<%= submit_tag '追加', class: "add_tag_btn btn btn-primary" %>
+				<% end %>
+			</div>
+		</article>
+
+		<aside class="relation_movie">
+			<p>関連動画</p>
+			<div class="relation_movie_info">
+				<ul>
+					<div class="video_page_ad">
+						<!-- admax -->
+						<script src="//adm.shinobi.jp/s/8f477c9f3b54f4d48297e7f8cf4ad1da"></script>
+						<!-- admax -->
+					</div>
+					<% relation_video_id_list = Array.new %>
+					<% offset = 0 %>
+					<% @tag_infos.each do |tag_info| %>
+						<% begin %>
+							<% relation_video_id = VideoTag.where.not(video_id: tag_info.video_id).offset(offset).find_by(tag: tag_info.tag) %>
+							<% if relation_video_id == nil then %>
+								<% break %>
+							<% end %>
+							<% offset += 1 %>
+						<% end while relation_video_id_list.include?(relation_video_id.video_id) %>
+						<% if relation_video_id == nil then %>
+							<% next %>
+						<% end %>
+						<% offset = 0 %>
+						<% relation_video_id_list << relation_video_id.video_id %>
+						<% video_info = VideoInfo.find_by(id: relation_video_id.video_id) %>
+						<li>
+							<%= link_to url_for(controller: :videos, action: :show, id: video_info.id) do %>
+							<% if video_info.thumbnail == '' then %>
+								<%= image_tag "#{video_info.id}.jpg" %>
+							<% else %>
+								<img src="<%= video_info.thumbnail %>" alt="thumbnail">
+							<% end %>
+							<div class="relation_movie_info_text">
+								<h3><%= video_info.title.truncate(50, omission: "...") %></h3>
+								<p class="right">視聴回数：<%= video_info.total_number_of_views %></p>
+							</div>
+							<% end %>
+						</li>
+					<% end %>
+					<% if relation_video_id_list.length != 0 && relation_video_id_list.length < 2 then %>
+						<% offset = 1 %>
+						<% begin %>
+							<% relation_video_id = VideoTag.where.not(video_id: @tag_infos[0].video_id).offset(offset).find_by(tag: @tag_infos[0].tag) %>
+							<% if relation_video_id == nil then %>
+								<% break %>
+							<% end %>
+							<% video_info = VideoInfo.find_by(id: relation_video_id.video_id) %>
+							<li>
+								<%= link_to url_for(controller: :videos, action: :show, id: video_info.id) do %>
+								<% if video_info.thumbnail == '' then %>
+									<%= image_tag "#{video_info.id}.jpg" %>
+								<% else %>
+									<img src="<%= video_info.thumbnail %>" alt="thumbnail">
+								<% end %>
+								<div class="relation_movie_info_text">
+									<h3><%= video_info.title.truncate(50, omission: "...") %></h3>
+									<p class="right">視聴回数：<%= video_info.total_number_of_views %></p>
+								</div>
+								<% end %>
+							</li>
+							<% offset += 1 %>
+						<% end while relation_video_id_list.include?(relation_video_id.video_id) || offset < 4 %>
+					<% end %>
+				</ul>
+			</div>
+		</aside>
+	</div>
+</div>

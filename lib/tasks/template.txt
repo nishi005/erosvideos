@@ -1,0 +1,45 @@
+﻿<div id="content">
+	<div class="content_wrapper">
+	<article class="movie_screen">
+		<iframe src="https://flashservice.xvideos.com/embedframe/26177375" frameborder=0 scrolling=no allowfullscreen=allowfullscreen></iframe>
+		<div class="movie_info">
+			<h2>義理の父親とのイケない関係…</h2>
+			<p class="right"><span class="total_number_of_views">視聴回数：3280回</span></p>
+			<p class="right"><span class="good_or_bad">グッドorバッド</span></p>
+		</div>
+		
+		<div class="movie_info">
+			<p>tags：</p>
+			<span>巨乳</span>
+			<span>熟女</span>
+			<span>寝取られ</span>
+			<span>近親相姦</span>
+		</div>
+	</article>
+
+	<aside class="relation_movie">
+		<p>関連動画</p>
+		<div class="relation_movie_info">
+			<ul>
+				<li><a href="#">
+					<%= image_tag '1.jpg' %>
+					<div class="relation_movie_info_text">
+						<h3>おっぱいデカすぎワロタ</h3>
+						<p>視聴回数：75028回</p>
+					</div>
+					</a>
+				</li>
+
+				<li><a href="#">
+					<%= image_tag '2.jpg' %>
+					<div class="relation_movie_info_text">
+						<h3>黒人美女のデカすぎるおっぱい</h3>
+						<p>視聴回数：75548回</p>
+					</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</aside>
+	</div>
+</div>

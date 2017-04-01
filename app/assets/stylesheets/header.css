@@ -1,0 +1,181 @@
+﻿#header {
+/*	background: red */
+	border-bottom: 1px solid #c2c2c2;
+	position: fixed;
+	width: 100%;
+	z-index: 999;
+	background: white;
+	top: 0;
+	left: 0;
+}
+
+.site {
+	float: left;
+	width: 33.3333%;
+}
+
+.site img {
+	margin-top: 5px;
+	margin-left: 50px;
+}
+
+.logo_image_sp {
+	display: none;
+}
+
+.login_menu {
+	float: right;
+	width: 10%;
+	text-align: right;
+}
+
+.login_menu p {
+	padding: 0;
+	margin: 0;
+}
+
+.search_form {
+	float: left;
+	padding-top: 15px;
+	width: 40%;
+}
+
+#form {
+	position: relative;
+}
+
+#keywd {
+	width: 75%;
+    height: 30px;
+    border: 1px solid #c2c2c2;
+}
+
+#keywd:focus {
+	outline: none;
+}
+
+.search_button {
+	position: absolute;
+	height: 30px;
+	border: solid 1px #aaaaaa;
+	padding: 5px 30px;
+	margin-left: -7px;
+}
+
+.login_menu img {
+
+}
+
+.login_menu p {
+	position: absolute;
+	bottom: 28px;
+	right: 5px;
+
+}
+
+.login_menu a {
+	text-decoration: none;
+}
+
+.boxA {
+	border-bottom: 1px solid #c2c2c2;
+}
+
+.boxA:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.menubtn {
+	position: absolute;
+	top: 15px;
+	left: 10px;
+	padding: 4px 8px;
+	border: solid 1px #aaaaaa;
+	border-radius: 5px;
+	background-color: #ffffff;
+	cursor: pointer;
+}
+
+.menubtn span {
+	display: inline-block;
+	text-indent: -9999px;
+}
+
+.menubtn i {
+	color: #888888;
+	font-size: 18px;
+}
+
+.menubtn:hover {
+	background-color: #dddddd;
+}
+
+.menubtn:focus {
+	outline: none;
+}
+
+.menu {
+	width: 30%;
+	margin: auto;
+	font-size: 13px;
+/*	background: green; */
+}
+
+.menu ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.menu li a {
+	display: block;
+	padding: 5px;
+	color: #000000;
+	text-decoration: none;
+	text-align: center;
+}
+
+.menu li a:hover {
+	background-color: #eeeeee;
+}
+
+.menu li {
+	float: left;
+	width: 33.33333%;
+}
+
+.menu ul:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+@media (max-width: 720px) {
+	.menu {
+		width: 70%;
+	}
+}
+
+@media (max-width: 620px) {
+	.logo_image_pc {
+		display: none;
+	}
+
+	.logo_image_sp {
+		display: inline-block;
+		width: 50px;
+		height:50px;
+	}
+
+	.site {
+		width: 30%;
+	}
+}
+
+@media (max-width: 415px) {
+	.login_menu p {
+		font-size: 13px;
+	}
+}

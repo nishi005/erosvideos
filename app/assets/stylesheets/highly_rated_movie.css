@@ -1,0 +1,29 @@
+#highly_rated_movie_content {
+	margin-top: 80px;
+	padding-top: 20px;
+	min-height: 90%;
+	height:auto !important;
+	height:90%;
+	background: #ebebeb;
+}
+
+.no_member {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.delete_highly_rated_movie button {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	border: 1px solid #aaaaaa;
+	font-size: 30px;
+}
+
+.delete_highly_rated_movie {
+	display: none;
+}
+
+.movie_list:hover > .delete_highly_rated_movie {
+	display: block;
+}

@@ -1,0 +1,34 @@
+#about_content {
+	margin-top: 65px;
+	padding-top: 40px;
+	min-height: 90%;
+	height:auto !important;
+	height:90%;
+  padding-bottom: 20px;
+	background: #ebebeb;
+}
+
+.about_content_body {
+  background: white;
+  width: 70%;
+  margin: auto;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ebebeb;
+}
+
+.about_content_body h2 {
+  padding: 10px;
+	border-bottom: 3px double #ccc;
+}
+
+.about_content_body p {
+  padding: 10px 8px;
+  font-size: 14px;
+}
+
+@media (max-width: 750px) {
+	.about_content_body {
+	  width: 95%;
+	}
+}

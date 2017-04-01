@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="google-site-verification" content="H6URmJJQYqhjU66_8I3H1PSDlr7S_S3PDWwrlBQwHhY" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <title><%= @title ? "#{@title} - ErosVideos" : 'ErosVideos' %></title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+  <link href="http://vjs.zencdn.net/5.10.8/video-js.css" rel="stylesheet">
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= content_for?(:outer) ? yield(:outer) : yield %>
+
+<script src="http://vjs.zencdn.net/5.10.8/video.js"></script>
+</body>
+</html>

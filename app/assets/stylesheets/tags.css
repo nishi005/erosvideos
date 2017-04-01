@@ -1,0 +1,12 @@
+#tag_content {
+	margin-top: 65px;
+	padding-top: 40px;
+	min-height: 90%;
+	height:auto !important;
+	height:90%;
+	background: #ebebeb;
+}
+
+.tag_movie {
+	position: relative;
+}

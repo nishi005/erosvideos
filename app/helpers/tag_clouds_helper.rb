@@ -1,0 +1,2 @@
+module TagCloudsHelper
+end

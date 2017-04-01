@@ -1,0 +1,29 @@
+.register_message {
+	width: 300px;
+	margin: auto;
+	padding-bottom: 20px;
+	text-align: center;
+}
+
+.register_message img {
+	width: 200px;
+	height: 70px;
+}
+
+.register_form {
+	width: 300px;
+	margin: auto;
+	padding: 10px;
+	padding-top: 40px;
+	text-align: center;
+	background: #ebebeb;
+}
+
+.register_form p {
+	font-size: 14px;
+	margin-top: 30px;
+}
+
+.form_element {
+	padding-bottom: 10px;
+}

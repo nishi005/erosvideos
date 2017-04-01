@@ -1,0 +1,16 @@
+
+highly_rated_movies0:
+  id: 980190978
+  usr_name: ryo
+  highly_rated_movie_id: 178
+  created_at: '2017-02-19 13:22:29.368122'
+  updated_at: '2017-02-19 13:22:29.368122'
+
+
+highly_rated_movies1:
+  id: 980190980
+  usr_name: ryo
+  highly_rated_movie_id: 159
+  created_at: '2017-02-19 15:06:30.213487'
+  updated_at: '2017-02-19 15:06:30.213487'
+

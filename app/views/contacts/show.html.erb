@@ -1,0 +1,46 @@
+<%= stylesheet_link_tag "bootstrap/bootstrap.min.css", :media => "all" %>
+<%= stylesheet_link_tag "bootstrap/bootstrap_extend.css", :media => "all" %>
+<%= javascript_include_tag "bootstrap/bootstrap.min.js" %>
+
+<div class="contact_content">
+  <% @title = 'お問い合わせ' %>
+  <div class="container-fluid container-extend">
+    <h1 class="h1_extend">お問い合わせ</h1>
+    <p>当サイトについてのご意見や違反動画のご報告などはこちらからお願いします。</p>
+    <div class="row">
+      <div class="col-sm-１">
+      </div>
+      <div class="col-sm-10">
+        <h1 class="bg-primary h1_extend">お問い合わせフォーム</h1>
+        <%= form_tag({action: 'sendmail'}, remote: true, class: "form-horizontal") do %>
+        <div class="form-group row">
+          <%= label_tag 'inputEmail', "E-mail", class: "col-sm-2" %>
+          <div class="col-sm-10">
+            <%= text_field_tag :inputEmail, "", class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-2">
+            <%= label_tag 'inputSubject', "subject" %>
+          </div>
+          <div class="col-sm-10">
+            <%= text_field_tag :inputSubject, "", class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-2">
+            <%= label_tag 'inputMessage', "Message" %>
+          </div>
+          <div class="col-sm-10">
+            <%= text_area_tag :inputMessage, "" , class: "form-control" %>
+          </div>
+        </div>
+        <%= button_tag '送信', type: 'submit', class: "btn btn-primary" %>
+        <p class="mail_send_result">メッセージ</p>
+        <% end %>
+      </div>
+      <div class="col-sm-1">
+      </div>
+    </div>
+  </div>
+</div>

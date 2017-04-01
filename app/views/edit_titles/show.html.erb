@@ -1,0 +1,33 @@
+<%= stylesheet_link_tag "bootstrap/bootstrap.min.css", :media => "all" %>
+<%= stylesheet_link_tag "bootstrap/bootstrap_extend.css", :media => "all" %>
+<%= javascript_include_tag "bootstrap/bootstrap.min.js" %>
+
+<div id="edit_title_content">
+  <div class="edit_title_content_body">
+    <h1 class="bg-primary h1_extend">タイトルの編集について</h1>
+    <p>本サイトではタイトルをユーザのみなさまで編集できるようになっています。</p>
+    <p>どんなタイトルを付けるかは基本的にみなさまの自由ですが、動画の内容と関係ないタイトルを付けるのは控えてください。</p>
+
+    <h1 class="bg-primary h1_extend">タイトルの編集</h1>
+    <h4>現在のタイトル：<strong><%= @video_info.title %></strong></h4>
+
+    <div class="container-fulid">
+      <div class="row">
+        <div class="col-sm-6">
+          <%= form_tag(video_edit_title_path(params[:video_id]), remote: true, class: "edit_title_form") do %>
+            <div class="form-group">
+              <%= label_tag 'edit_title_', '新しいタイトル' %>
+              <%= text_field_tag :new_title, "", size: 50, class: "form-control" %>
+            </div>
+            <%= button_tag '変更', class: "btn btn-primary" %>
+            <p class="edit_result_message" >変更しました</p>
+          <% end %>
+        </div>
+        <div class="col-sm-6">
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

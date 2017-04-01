@@ -1,0 +1,83 @@
+<div id="content">
+<% @title = '履歴' %>
+<% if @usr != nil then%>
+<div class="index_ad_pc">
+	<!-- admax -->
+	<script src="//adm.shinobi.jp/s/e4ff0c038207c5af725ddfb97895a474"></script>
+	<!-- admax -->
+</div>
+
+<div class="index_ad_sp">
+	<!-- admax -->
+	<script src="//adm.shinobi.jp/s/ae5341676559a76bcbb1d6c8a27abd6e"></script>
+	<!-- admax -->
+</div>
+	<div class="new_movie outer_frame">
+		<p>履歴 (<%= @total_of_results %>件)</p>
+		<% @i = 1 %>
+		<% @histories.each do |history| %>
+		<% @video_info = VideoInfo.find_by(id: history.history_movie_id) %>
+		<% begin %>
+		<article class="movie_list movie_id_<%= @i %>">
+			<%= link_to url_for(controller: :videos, action: :show, id: history.history_movie_id) do %>
+			<div class="thumbnail">
+				<% if @video_info.thumbnail == '' then %>
+					<%= image_tag "#{@video_info.id}.jpg" %>
+				<% else %>
+					<img src="<%= @video_info.thumbnail %>" alt="thumbnail">
+				<% end %>
+				<time><%= @video_info.time.to_s.split(" ")[1] %></time>
+			</div>
+			<p><%= @video_info.title.truncate(60, omission: "...") %></p>
+			<% end %>
+			<% @tags = VideoTag.where(video_id: @video_info.id) %>
+			<% @tags.each_with_index do |tag, index| %>
+				<% break if index > 4 %>
+				<% next if tag.tag == @video_info.video_type %>
+				<%= link_to tag.tag, url_for(controller: :tags, tag_name: tag.tag), class: "tag_list" %>
+			<% end %>
+			<%= link_to url_for(controller: :tags, tag_name: @video_info.video_type) do %>
+				<p><span class="movie_site"><%= @video_info.video_type %></span></p>
+			<% end %>
+			<p><span class="number_of_views">視聴回数：<%= @video_info.total_number_of_views %></span></p>
+		<% rescue => e %>
+			<p>削除されています。</p>
+		<% end %>
+		</article>
+		<% @i += 1 %>
+		<% end %>
+	</div>
+	<% @controller = "histories" %>
+	<% @action = "show" %>
+	<% @argument_num = 0 %>
+	<%= render 'application/pagenation' %>
+
+	<div class="index_ad_pc">
+		<!-- admax -->
+		<script src="//adm.shinobi.jp/s/e4ff0c038207c5af725ddfb97895a474"></script>
+		<!-- admax -->
+	</div>
+
+	<div class="index_ad_sp">
+		<!-- admax -->
+		<script src="//adm.shinobi.jp/s/ae5341676559a76bcbb1d6c8a27abd6e"></script>
+		<!-- admax -->
+	</div>
+
+<% else %>
+<p class="no_member">履歴はログインユーザのみ表示されます。</p>
+<p class="no_member"><%= link_to '新規登録', signup_path %>を行ってください。</p>
+
+<div class="index_ad_pc">
+	<!-- admax -->
+	<script src="//adm.shinobi.jp/s/e4ff0c038207c5af725ddfb97895a474"></script>
+	<!-- admax -->
+</div>
+
+<div class="index_ad_sp">
+	<!-- admax -->
+	<script src="//adm.shinobi.jp/s/ae5341676559a76bcbb1d6c8a27abd6e"></script>
+	<!-- admax -->
+</div>
+<% end %>
+</div>

@@ -1,0 +1,33 @@
+﻿#footer {
+	height: 80px;
+}
+
+.site_footer {
+	border-top: 1px solid #c2c2c2;
+}
+
+.footer_content {
+	border-top: 1px solid #c2c2c2;
+}
+
+.footer_content ul {
+	list-style: none;
+	margin-top: 5px;
+	padding: 0;
+}
+
+.footer_content ul::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.footer_content li {
+	float: left;
+}
+
+.footer_content a {
+	padding: 10px;
+	text-decoration: none;
+	font-size: 14px;
+}

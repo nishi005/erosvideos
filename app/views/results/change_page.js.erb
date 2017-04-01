@@ -1,0 +1,71 @@
+var i = 1;
+var class_name = '';
+const MOVIE_LIST_NUM = <%= @LIST_NUM %>;
+const PAGENATION_MAX = 5;
+
+<% @results.each do |result| %>
+  class_name = '.movie_id_';
+  class_name = class_name + i;
+ // alert(class_name);
+  $(class_name).html(
+    '<%= link_to url_for(controller: :video_infos, action: :video_page, id: result.id) do %>\
+    <%= image_tag "#{result.id}.jpg" %>\
+    <p><%= result.title.truncate(60, omission: "...") %></p>\
+    <% end %>\
+    <%= link_to url_for(controller: :video_infos, action: :tags, tag_name: result.video_type) do %>\
+      <p><span class="movie_site"><%= result.video_type %></span></p>\
+    <% end %>\
+    <p><span class="number_of_views">視聴回数：<%= result.total_number_of_views %></span></p>'
+  );
+  i += 1;
+<% end %>
+
+//12個に満たない場合は非表示
+if(i < MOVIE_LIST_NUM) {
+  var empty_movie_num = MOVIE_LIST_NUM - i;
+  for(i = (MOVIE_LIST_NUM - empty_movie_num); i <= MOVIE_LIST_NUM; i++) {
+    class_name = '.movie_id_' + i;
+    $(class_name).css({
+      display: "none"
+    });
+  }
+} else {
+  for(i = 1; i <= MOVIE_LIST_NUM; i++) {
+    class_name = '.movie_id_' + i;
+    $(class_name).css({
+      display: "inline-block"
+    });
+  }
+}
+
+var current_page_num = $('.page_num').html();
+var pagenation_num = <%= @pagenation_num.to_i %>
+var page_num = <%= @page_num.to_i %>
+var pagenation_diff = pagenation_num - page_num;
+
+var left = Math.ceil(page_num - (PAGENATION_MAX / 2));
+
+left = left <= 0 ? 1 : left;
+var right = left + (PAGENATION_MAX - 1);
+if(pagenation_num < right) {
+  left = pagenation_num - PAGENATION_MAX + 1;
+  right = pagenation_num;
+}
+
+for(i = 1; i <= pagenation_num; i++) {
+  if((i < left) || (i > right)) {
+    $('.pagenation_form_' + i).css("display", "none");
+  } else {
+    $('.pagenation_form_' + i).css("display", "inline-block");
+  }
+}
+
+$('.page_num').html(
+  '<%= escape_javascript("#{@page_num}") %>'
+);
+
+$('.pagenation_btn_<%= @page_num %>').prop("disabled", true);
+$('.pagenation_btn_' + current_page_num).css("background", "white");
+$('.pagenation_btn_' + current_page_num).prop("disabled", false);
+
+$('html, body').animate({scrollTop : 0}, 'slow');

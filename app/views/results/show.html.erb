@@ -1,0 +1,107 @@
+﻿<div id="results_content">
+	<% @title = "キーワード検索：#{params[:keywd]}" %>
+	<div class="index_ad_pc">
+		<!-- admax -->
+		<script src="//adm.shinobi.jp/s/e4ff0c038207c5af725ddfb97895a474"></script>
+		<!-- admax -->
+	</div>
+
+	<div class="index_ad_sp">
+		<!-- admax -->
+		<script src="//adm.shinobi.jp/s/ae5341676559a76bcbb1d6c8a27abd6e"></script>
+		<!-- admax -->
+	</div>
+
+	<div class="search_filter">
+		<h2>検索フィルタ</h2>
+			<%= form_tag(result_path(0), class: "search_filter_form") do %>
+				<div class="form-group">
+					<%= label_tag 'inputSorting', '並び替え', class: "search_filter_label" %>
+					<%= select_tag 'sortingOption', options_for_select({'アップロード日' => 'update_day', '視聴回数' => 'number_of_views', '評価' => 'movie_rate'}), class: "select_box" %>
+				</div>
+				<div class="form-group">
+					<%= label_tag 'inputVideoType', '動画サイト', class: "search_filter_label" %>
+					<%= select_tag 'videoType', options_for_select({'全て' => 'all', 'erovideo' => 'erovideo', 'SHARE MOVIE' => 'sharemovie', 'ThisAV' => 'ThisAV'}), class: "select_box" %>
+				</div>
+				<div class="form-group">
+					<%= label_tag 'inputUploadPeriod', 'アップロード日', class: "search_filter_label" %>
+					<%= select_tag 'uploadPeriod', options_for_select({'全期間' => 'all', '今日' => 'today', '今週' => 'week', '今月' => 'month', '今年' => 'year'}), class: "select_box" %>
+				</div>
+				<div class="form-group">
+					<%= label_tag 'inputMovieLength', '再生時間', class: "search_filter_label" %>
+					<div class="input_movie_length_field">
+						<%= text_field_tag :inputMovieLengthMin, "", class: "inputMovieLengthMin", pattern: "[0-9]*" %><span>分～</span><%= text_field_tag :inputMovieLengthMax, "", class: "inputMovieLengthMin", pattern: "[0-9]*" %><span>分までの間</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<%= hidden_field_tag :keywd, params[:keywd] %>
+					<%= hidden_field_tag :list_num, params[:list_num] %>
+					<%= button_tag '適用', type: 'submit', class: 'search_filter_apply_btn' %>
+					<%= button_tag 'キャンセル', type: 'button', class: 'search_filter_cancel_btn' %>
+				</div>
+			<% end %>
+	</div>
+
+	<div class="result_movies outer_frame">
+		<p>キーワード：<%= params['keywd'] %> (<%= @total_of_results %>件)</p>
+		<%= button_tag 'フィルタ', type: 'button', class: "search_filter_btn" %>
+		<% @i = 1 %>
+		<% @results.each do |video_info| %>
+		<article class="movie_list movie_id_<%= @i %>">
+			<%= link_to url_for(controller: :videos, action: :show, id: video_info.id) do %>
+			<div class="thumbnail">
+				<% if video_info.thumbnail == '' then %>
+					<%= image_tag "#{video_info.id}.jpg" %>
+				<% else %>
+					<img src="<%= video_info.thumbnail %>" alt="thumbnail">
+				<% end %>
+				<time><%= video_info.time.to_s.split(" ")[1] %></time>
+			</div>
+			<p><%= video_info.title.truncate(60, omission: "...") %></p>
+			<% end %>
+			<% @tags = VideoTag.where(video_id: video_info.id) %>
+			<% @tags.each_with_index do |tag, index| %>
+				<% break if index > 4 %>
+				<% next if tag.tag == video_info.video_type %>
+				<%= link_to tag.tag, url_for(controller: :tags, tag_name: tag.tag), class: "tag_list" %>
+			<% end %>
+			<%= link_to url_for(controller: :tags, tag_name: video_info.video_type) do %>
+				<p><span class="movie_site"><%= video_info.video_type %></span></p>
+			<% end %>
+			<p><span class="number_of_views">視聴回数：<%= video_info.total_number_of_views %></span></p>
+		</article>
+		<% @i += 1 %>
+		<% end %>
+	</div>
+
+	<% @controller = 'results' %>
+	<% @action = 'show' %>
+	<% @argument_num = 7 %>
+	<% @param_key_1 = "keywd" %>
+	<% @param_1 = "#{params[:keywd]}" %>
+	<% @param_key_2 = "list_num" %>
+	<% @param_2 = "#{params[:list_num]}" %>
+	<% @param_key_3 = "sortingOption" %>
+	<% @param_3 = @sortingOption %>
+	<% @param_key_4 = "videoType" %>
+	<% @param_4 = @videoType %>
+	<% @param_key_5 = "uploadPeriod" %>
+	<% @param_5 = @uploadPeriod %>
+	<% @param_key_6 = "inputMovieLengthMin" %>
+	<% @param_6 = @inputMovieLengthMin %>
+	<% @param_key_7 = "inputMovieLengthMax" %>
+	<% @param_7 = @inputMovieLengthMax %>
+	<%= render 'application/pagenation' %>
+
+	<div class="index_ad_pc">
+		<!-- admax -->
+		<script src="//adm.shinobi.jp/s/e4ff0c038207c5af725ddfb97895a474"></script>
+		<!-- admax -->
+	</div>
+
+	<div class="index_ad_sp">
+		<!-- admax -->
+		<script src="//adm.shinobi.jp/s/ae5341676559a76bcbb1d6c8a27abd6e"></script>
+		<!-- admax -->
+	</div>
+</div>

@@ -1,0 +1,40 @@
+//alert("<%= params[:tag_index] %>");
+<% if @record_limit >= eval("#{params[:tag_index]}") then %>
+  <% if @tag_info != nil then %>
+    $('.tag_index').attr('value', '<%= params[:tag_index].to_i + 1 %>');
+    $('.tag_current_size').attr('value', '<%= params[:tag_index].to_i %>')
+    $('.tag_edit_link').before($('<%= link_to url_for(controller: :tags, tag_name: @tag_info.tag) do %>\
+                                    <span class="<%= @tag_info.tag %>"><%= params[:added_tag] %></span>\
+                                    <% end %>\
+                                    <%= form_tag({controller: :tags, action: :destroy, id: params[:id]}, class: "tag_delete_form tag_delete_form_" + @tag_info.tag, remote: true, method: :delete) do %>\
+                                      <%= hidden_field_tag :tag_name, @tag_info.tag %>\
+                                      <%= hidden_field_tag :deleted_tag, @tag_info.tag %>\
+                                      <%= hidden_field_tag :tag_current_size, params[:tag_index], class: "tag_current_size" %>\
+                                      <%= button_tag type: "submit", class: "tag_delete_btn" do %>\
+                                        <i class="fa fa-times" aria-hidden="true"></i>\
+                                      <% end %>\
+                                    <% end %>'));
+  <% end %>
+<% end %>
+
+$('.tag_delete_form').css("display", "inline-block");
+
+var $popup = $('.popup');
+var top_offset = $('.add_tag_btn').offset().top;
+var left_offset = $('.add_tag_btn').offset().left;
+
+$popup.css({
+  top: top_offset + 30,
+  left: left_offset
+});
+
+$('.popup p').html(
+  '<%= escape_javascript("#{@message}") %>'
+);
+
+$('.popup p').css("display", "inline-block")
+$popup.fadeIn('slow');
+
+setTimeout(function() {
+  $popup.fadeOut('slow');
+}, 3000);

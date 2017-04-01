@@ -1,0 +1,184 @@
+﻿#content {
+	margin-top: 65px;
+	padding-top: 20px;
+	min-height: 90%;
+	height:auto !important;
+	height:90%;
+	padding-bottom: 20px;
+	background: #ebebeb;
+}
+
+.index_ad_pc {
+		text-align: center;
+		padding-bottom: 15px;
+}
+
+.no_member {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#content::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.main_content {
+}
+
+.outer_frame {
+	width: 1085px;
+	margin: auto;
+	margin-bottom: 20px;
+	background: white;
+	border: 1px solid #c2c2c2;
+	border-radius: 5px;
+}
+
+.outer_frame a.tag_list {
+	margin: 0 0 5px 10px;
+	padding: 2px;
+	text-decoration: none;
+	color: white;
+	background-color: #00a7db;
+	border-radius: 2px;
+	display: inline-block;
+}
+
+.outer_frame p {
+	padding: 10px;
+}
+
+.outer_frame p.right {
+	padding-top: 0;
+	text-align: right;
+}
+
+.outer_frame p.right a {
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.outer_frame:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.movie_list {
+	position: relative;
+	width: 250px;
+	min-height: 250px;
+	height:auto !important;
+	height:250px;
+	margin-left: 13px;
+	margin-bottom: 30px;
+	padding: 5px;
+	border: 1px solid #c2c2c2;
+	background: #eeeeee;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.thumbnail {
+	position: relative;
+	padding: 0;
+	margin: 0;
+}
+
+.thumbnail time {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	z-index: 10;
+	padding: 2px;
+	background: black;
+	opacity: 0.8;
+	color: white;
+}
+
+.movie_list img {
+}
+
+/*
+.movie_list:nth-of-type(n + 13) {
+	display: none;
+}
+*/
+
+.movie_list .movie_site {
+	position: absolute;
+	bottom: 25px;
+}
+
+.movie_list .number_of_views {
+	position: absolute;
+	bottom: 5px;
+}
+
+.movie_list img {
+	width: 100%;
+}
+
+.movie_list a {
+	color: black;
+	text-decoration: none;
+}
+
+.movie_list p {
+	margin-top: 0;
+	margin-bottom: 5px;
+	font-size: 14px;
+	word-wrap: break-word;
+}
+
+.movie_list .movie_site {
+	color: #4169e1;
+}
+
+.movie_list .number_of_views {
+	color: #202020;
+}
+
+.movie_list:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+@media (min-width: 1400px) {
+	.outer_frame {
+		width: 1360px;
+	}
+}
+
+@media (max-width: 1122px) {
+	.outer_frame {
+		width: 815px;
+	}
+}
+
+@media (max-width: 850px) {
+	.outer_frame {
+		width: 545px;
+	}
+	.index_ad_pc {
+		display: none;
+	}
+
+	.index_ad_sp {
+		text-align: center;
+		padding-bottom: 15px;
+	}
+}
+
+@media (max-width: 580px) {
+	.outer_frame {
+		width: 308px;
+	}
+
+	.movie_list {
+		width: 280px;
+	}
+}

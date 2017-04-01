@@ -1,0 +1,29 @@
+﻿#favorite_content {
+	margin-top: 80px;
+	min-height: 90%;
+	height:auto !important;
+	height:90%;
+	padding-top: 20px;
+	background: #ebebeb;
+}
+
+.no_member {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.delete_favorite_movie button {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	border: 1px solid #aaaaaa;
+	font-size: 30px;
+}
+
+.delete_favorite_movie {
+	display: none;
+}
+
+.movie_list:hover > .delete_favorite_movie {
+	display: block;
+}

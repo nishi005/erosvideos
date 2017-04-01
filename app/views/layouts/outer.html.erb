@@ -1,0 +1,68 @@
+﻿<% content_for :outer do %>
+<% @LIST_NUM = 12 %>
+<div id="header">
+	<div class="boxA">
+		<div class="site">
+			<%= link_to image_tag('logo_pc.png', width: 150, height: 50, class: :logo_image_pc), root_path %>
+			<%= link_to image_tag('logo_sp.png', width: 150, height: 50, class: :logo_image_sp), root_path %>
+		</div>
+
+		<div class="search_form">
+			<%= form_tag(result_path(0), id: :form, class: :search) do %>
+				<%= hidden_field_tag :list_num, @LIST_NUM %>
+				<%= text_field_tag :keywd, '' %>
+				<%= button_tag type: 'submit', class: :search_button do %>
+					<i class="fa fa-search" aria-hidden="true"></i>
+				<% end %>
+			<% end %>
+		</div>
+
+		<div class="login_menu">
+			<p><%= link_to_if @usr.nil?, 'ログイン', login_path do |name|
+				   link_to "#{@usr.usr_name}", root_path
+				   end %></p>
+		</div>
+	</div>
+
+	<button type="button" class="menubtn"><i class="fa fa-bars"></i><span>Menu</span></button>
+	<nav class="menu">
+		<ul>
+			<li><%= link_to 'ホーム', root_path %></li>
+			<li><%= link_to '新着', url_for(controller: :all_videos, action: :show, order: :new) %></li>
+			<li><%= link_to '人気', url_for(controller: :all_videos, action: :show, order: :popular) %></li>
+		</ul>
+	</nav>
+
+	<div id="sidebar">
+		<ul>
+			<li><%= link_to 'お気に入り', favorites_path %></li>
+			<li><%= link_to '後で見る', watch_later_index_path %></li>
+			<li><%= link_to '高評価した動画', highly_rated_videos_path %></li>
+			<li><%= link_to '履歴', histories_path %></li>
+			<li><%= link_to 'タグクラウド', tag_cloud_path %></li>
+			<li>
+			<% if @usr != nil then %>
+			<%= link_to 'ログアウト', logout_path %>
+			<% end %>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<%= yield %>
+
+<div id="footer">
+	<div class="site_footer">
+		<%= link_to image_tag('logo_pc.png', width: 150, height: 50), root_path %>
+	</div>
+
+	<div class="footer_content">
+		<ul>
+			<li><%= link_to 'ErosVideosについて', about_path %></li>
+			<li><%= link_to 'お問い合わせ', contact_path %></li>
+		</ul>
+	</div>
+</div>
+
+<% end %>
+<%= render template: 'layouts/application' %>

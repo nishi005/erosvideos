@@ -1,0 +1,104 @@
+#results_content {
+	margin-top: 65px;
+	padding-top: 20px;
+	min-height: 90%;
+	height:auto !important;
+	height:90%;
+	background: #ebebeb;
+}
+
+.overlay {
+	width: 100%;
+	height: 120%;
+	background: black;
+	opacity: 0.8;
+	z-index: 1000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: none;
+}
+
+.search_filter_form {
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-top: 20px;
+}
+
+.search_filter_label {
+	float: left;
+	width: 30%;
+}
+
+.select_box {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+
+	float: left;
+	width: 70%;
+	padding: 5px;
+	border: 1px solid #999;
+	background: #eee;
+}
+
+.input_movie_length_field {
+	float: left;
+	width: 70%;
+}
+
+.input_movie_length_field input {
+	border: 0;
+	padding: 5px;
+	margin-right: 5px;
+	font-size: 14px;
+	border: solid 1px #999;
+	width: 30%;
+}
+
+.input_movie_length_field input:nth-of-type(2) {
+	margin-left: 5px;
+}
+
+.search_filter_cancel_btn {
+	float: right;
+	border: 1px solid #c2c2c2;
+}
+
+.search_filter_apply_btn {
+	float: right;
+	border: 1px solid #c2c2c2;
+	margin-left: 10px;
+}
+
+.form-group::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.result_movies {
+	position: relative;
+}
+
+.search_filter_btn {
+	position: absolute;
+	border: 1px solid #c2c2c2;
+	top: 10px;
+	right: 15px;
+}
+
+.search_filter {
+	width: 80%;
+	background: white;
+	z-index: 1001;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: none;
+}
+
+.search_filter h2 {
+	font-size: 20px;
+	padding-left: 10px;
+}

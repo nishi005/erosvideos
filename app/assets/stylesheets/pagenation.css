@@ -1,0 +1,50 @@
+.pagenation {
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+.pagenation_jump {
+	text-align: center;
+}
+
+.pagenation:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.pagenation_form {
+	display: inline-block;
+}
+
+.pagenation_btn {
+	float: left;
+	width: 30px;
+	height: 30px;
+	padding: 5px;
+	border: 1px solid #aaaaaa;
+	background: white;
+	cursor: pointer;
+}
+
+.pagenation_btn_next {
+	width: 50px;
+}
+
+.pagenation_btn_prev {
+	width: 50px;
+}
+
+.pagenation_btn_jump {
+	width: auto;
+	float: none;
+}
+
+.pagenation_btn[disabled] {
+	background:#DCDCDC;
+	cursor:not-allowed;
+}
+
+.pagenation_btn:focus {
+		outline: none;
+}

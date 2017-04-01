@@ -1,0 +1,86 @@
+﻿<div id="content">
+	<% @title = 'トップ' %>
+	<div class="index_ad_pc">
+		<!-- admax -->
+		<script src="//adm.shinobi.jp/s/e4ff0c038207c5af725ddfb97895a474"></script>
+		<!-- admax -->
+	</div>
+
+	<div class="index_ad_sp">
+		<!-- admax -->
+		<script src="//adm.shinobi.jp/s/ae5341676559a76bcbb1d6c8a27abd6e"></script>
+		<!-- admax -->
+	</div>
+
+	<div class="new_movie outer_frame">
+		<p>新着動画</p>
+		<% @new_video_infos.each do |video_info| %>
+		<article class="movie_list">
+			<%= link_to url_for(controller: :videos, action: :show, id: video_info.id) do %>
+				<div class="thumbnail">
+					<% if video_info.thumbnail == '' then %>
+						<%= image_tag "#{video_info.id}.jpg" %>
+					<% else %>
+						<img src="<%= video_info.thumbnail %>" alt="thumbnail">
+					<% end %>
+					<time><%= video_info.time.to_s.split(" ")[1] %></time>
+				</div>
+				<p><%= video_info.title.truncate(50, omission: "...") %></p>
+			<% end %>
+			<% @tags = VideoTag.where(video_id: video_info.id) %>
+			<% @tags.each_with_index do |tag, index| %>
+				<% break if index > 4 %>
+				<% next if tag.tag == video_info.video_type %>
+				<%= link_to tag.tag, url_for(controller: :tags, tag_name: tag.tag), class: "tag_list" %>
+			<% end %>
+			<%= link_to url_for(controller: :tags, tag_name: video_info.video_type) do %>
+				<p><span class="movie_site"><%= video_info.video_type %></span></p>
+			<% end %>
+			<p><span class="number_of_views">視聴回数：<%= video_info.total_number_of_views %></span></p>
+		</article>
+		<% end %>
+		<p class="right"><%= link_to 'もっと見る', url_for(controller: :all_videos, action: :show, order: :new, id: 1) %></p>
+	</div>
+
+	<div class="index_ad_pc">
+		<!-- admax -->
+		<script src="//adm.shinobi.jp/s/e4ff0c038207c5af725ddfb97895a474"></script>
+		<!-- admax -->
+	</div>
+
+	<div class="index_ad_sp">
+		<!-- admax -->
+		<script src="//adm.shinobi.jp/s/ae5341676559a76bcbb1d6c8a27abd6e"></script>
+		<!-- admax -->
+	</div>
+
+	<div class="popular_movie outer_frame">
+		<p>人気動画</p>
+		<% @popular_video_infos.each do |video_info| %>
+		<article class="movie_list">
+			<%= link_to url_for(controller: :videos, action: :show, id: video_info.id) do %>
+			<div class="thumbnail">
+				<% if video_info.thumbnail == '' then %>
+					<%= image_tag "#{video_info.id}.jpg" %>
+				<% else %>
+					<img src="<%= video_info.thumbnail %>" alt="thumbnail">
+				<% end %>
+				<time><%= video_info.time.to_s.split(" ")[1] %></time>
+			</div>
+			<p><%= video_info.title.truncate(50, omission: "...") %></p>
+			<% end %>
+			<% @tags = VideoTag.where(video_id: video_info.id) %>
+			<% @tags.each_with_index do |tag, index| %>
+				<% break if index > 4 %>
+				<% next if tag.tag == video_info.video_type %>
+				<%= link_to tag.tag, url_for(controller: :tags, tag_name: tag.tag), class: "tag_list" %>
+			<% end %>
+			<%= link_to url_for(controller: :tags, tag_name: video_info.video_type) do %>
+				<p><span class="movie_site"><%= video_info.video_type %></span></p>
+			<% end %>
+			<p><span class="number_of_views">視聴回数：<%= video_info.total_number_of_views %></span></p>
+		</article>
+		<% end %>
+		<p class="right"><%= link_to 'もっと見る', url_for(controller: :all_videos, action: :show, order: :popular, id: 1) %></p>
+	</div>
+</div>

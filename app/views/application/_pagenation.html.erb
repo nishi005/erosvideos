@@ -1,0 +1,72 @@
+<div class="pagenation">
+  <% pagenation_max = 5 %>
+  <% page_num = @page_num + 1 %>
+  <% left = (page_num - (pagenation_max / 2)).ceil %>
+  <% left = left <= 0 ? 1 : left %>
+  <% right = left + (pagenation_max - 1); %>
+  <% if @pagenation_num < right then %>
+    <% if @pagenation_num >= pagenation_max then %>
+      <% left = @pagenation_num - pagenation_max + 1 %>
+    <% end %>
+    <% right = @pagenation_num %>
+  <% end %>
+  <!--「前へ」ページネーション-->
+  <%= form_tag({controller: @controller, action: @action, id: @page_num - 1}, class: "pagenation_form pagenation_form_prev") do %>
+    <% 1.upto(@argument_num) do |j| %>
+    <%= hidden_field_tag eval("@param_key_#{j}"), eval("@param_#{j}") %>
+    <% end %>
+    <% if @page_num == 0 then %>
+    <!--何も表示しない-->
+    <% elsif @pagenation_num == 0 %>
+    <!--何も表示しない-->
+    <% else %>
+      <%= button_tag '前へ', type: 'submit', class: "pagenation_btn pagenation_btn_prev" %>
+    <% end %>
+  <% end %>
+  <!--数値ページネーション-->
+  <% left.upto(right) do |i| %>
+    <%= form_tag({controller: @controller, action: @action, id: i - 1}, class: "pagenation_form pagenation_form_" + (i).to_s) do %>
+        <% 1.upto(@argument_num) do |j| %>
+        <%= hidden_field_tag eval("@param_key_#{j}"), eval("@param_#{j}") %>
+        <% end %>
+        <%= hidden_field_tag :pagenation_num, @pagenation_num %>
+        <% if i != page_num then %>
+          <%= button_tag type: 'submit', class: "pagenation_btn pagenation_btn_" + (i).to_s, disabled: false do %>
+            <p class="page_num_display"><%= i %></p>
+          <% end %>
+        <% else %>
+          <%= button_tag type: 'submit', class: "pagenation_btn pagenation_btn_" + (i).to_s, disabled: true do %>
+            <p class="page_num_display"><%= i %></p>
+          <% end %>
+        <% end %>
+    <% end %>
+  <% end %>
+  <!--「次へ」ページネーション-->
+  <%= form_tag({controller: @controller, action: @action, id: @page_num + 1}, class: "pagenation_form pagenation_form_next") do %>
+    <% 1.upto(@argument_num) do |j| %>
+    <%= hidden_field_tag eval("@param_key_#{j}"), eval("@param_#{j}") %>
+    <% end %>
+    <% if @pagenation_num == @page_num + 1 then %>
+    <!--何も表示しない-->
+    <% elsif @pagenation_num == 0 %>
+    <!--何も表示しない-->
+    <% else %>
+      <%= button_tag '次へ', type: 'submit', class: "pagenation_btn pagenation_btn_next" %>
+    <% end %>
+  <% end %>
+</div>
+
+<% if pagenation_max < @pagenation_num %>
+  <div class="pagenation pagenation_jump">
+    <%= form_tag({controller: @controller, action: @action}, class: "pagenation_form pagenation_form_jump form-inline") do %>
+      <% 1.upto(@argument_num) do |j| %>
+      <%= hidden_field_tag eval("@param_key_#{j}"), eval("@param_#{j}") %>
+      <% end %>
+      <div class="form-group">
+        <%= hidden_field_tag :max_range, @pagenation_num %>
+        <%= text_field_tag :jump_page_num, "", class: "form-control", size: 5, pattern: "[0-9]+" %>
+      </div>
+      <%= button_tag 'ジャンプ', type: 'submit', class: "pagenation_btn pagenation_btn_jump" %>
+    <% end %>
+</div>
+<% end %>

@@ -1,0 +1,16 @@
+
+after_watch_movies0:
+  id: 980190963
+  usr_name: ryo
+  after_watch_movie_id: 20
+  created_at: '2017-02-13 15:39:25.877823'
+  updated_at: '2017-02-13 15:39:25.877823'
+
+
+after_watch_movies1:
+  id: 980190965
+  usr_name: ryo
+  after_watch_movie_id: 159
+  created_at: '2017-02-19 15:06:28.289742'
+  updated_at: '2017-02-19 15:06:28.289742'
+

@@ -1,0 +1,13 @@
+﻿* {
+	margin: 0;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+         -o-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+	font-family: 'メイリオ', 'Meiryo', sans-serif;
+}

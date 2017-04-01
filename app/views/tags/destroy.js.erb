@@ -1,0 +1,4 @@
+$('.tag_index').attr('value', '<%= params[:tag_current_size].to_i %>');
+$('.tag_current_size').attr('value', '<%= params[:tag_current_size].to_i - 1 %>')
+$('.tag_delete_form_<%= params[:tag_name] %>').remove();
+$('.<%= params[:tag_name] %>').css("display", "none");

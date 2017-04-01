@@ -1,0 +1,18 @@
+<div id="tag_cloud_content">
+  <% @title = 'タグクラウド' %>
+  <div class="tag_cloud_content_body">
+    <% tags = ['erovideo', 'SHARE MOVIE', 'ThisAV'] %>
+    <h2>Main Tags</h2>
+    <% tags.each do |tag| %>
+      <%= link_to tag, controller: :tags, tag_name: tag %>
+    <% end %>
+
+    <h2>Other Tags</h2>
+    <% @tag_infos.each do |tag_info| %>
+      <% if tags.include?(tag_info.tag) == false then %>
+        <%= link_to "#{tag_info.tag}", controller: :tags, tag_name: tag_info.tag, id: 0 %>
+        <% tags << tag_info.tag %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

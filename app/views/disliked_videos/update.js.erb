@@ -1,0 +1,28 @@
+var $thums_down = $('.thums_down');
+var $popup = $('.popup');
+
+var top_offset = $thums_down.offset().top;
+var left_offset = $thums_down.offset().left;
+
+$('.thums_down_num').html(
+	'<%= escape_javascript("#{@bad_num}") %>'
+);
+
+//ポップアップを移動させる
+$popup.css({
+  top: top_offset + 25,
+  left: left_offset
+});
+
+//ポップアップにメッセージを入れる
+$('.popup p').html(
+  '<%= escape_javascript("#{@message}") %>'
+);
+
+$('.popup p').css('display', 'inline-block');
+
+$popup.fadeIn('slow');
+
+setTimeout(function() {
+  $popup.fadeOut('slow');
+}, 2000);
